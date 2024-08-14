@@ -1,50 +1,7 @@
-# React + TypeScript + Vite
+# Generative AI Recipe App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+![recipe-generator-1](https://github.com/user-attachments/assets/26923f6c-1fbe-4016-9dd7-91aa802bb9fe)
+![recipe-generator-2](https://github.com/user-attachments/assets/cc2cb3f4-9d2c-4c67-8b73-e999e0952fe6)
+![recipe-generator-3](https://github.com/user-attachments/assets/1c2f4469-562e-46df-a1c8-015540514639)
+![recipe-generator-4](https://github.com/user-attachments/assets/089ce5d8-68cc-4e03-8b52-fe6fc6a89a2d)
+![recipe-generator-5](https://github.com/user-attachments/assets/a21b0135-3d0d-4d57-8a09-20b4233fcd89)
