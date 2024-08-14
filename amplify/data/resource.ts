@@ -1,53 +1,37 @@
 import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
 
-/*== STEP 1 ===============================================================
-The section below creates a Todo database table with a "content" field. Try
-adding a new "isDone" field as a boolean. The authorization rule below
-specifies that any unauthenticated user can "create", "read", "update", 
-and "delete" any "Todo" records.
-=========================================================================*/
+// Define the schema for the backend resources
 const schema = a.schema({
-  Todo: a
-    .model({
-      content: a.string(),
-    })
-    .authorization((allow) => [allow.guest()]),
+  // Define a custom type 'BedrockResponse' with two properties: 'body' and 'error'
+  BedrockResponse: a.customType({
+    body: a.string(),   // The 'body' property is a string
+    error: a.string(),  // The 'error' property is a string
+  }),
+
+  // Define a query 'askBedrock' in the schema
+  askBedrock: a
+    .query()  // Specify that this is a query type
+    .arguments({ ingredients: a.string().array() })  // Define the query arguments with an array of strings
+    .returns(a.ref("BedrockResponse"))  // Specify that the query returns a 'BedrockResponse' type
+    .authorization((allow) => [allow.authenticated()])  // Set authorization to allow only authenticated users
+    .handler(
+      // Define the query handler configuration
+      a.handler.custom({ entry: "./bedrock.js", dataSource: "bedrockDS" })  // Use a custom handler with the entry point in 'bedrock.js' and the data source 'bedrockDS'
+    ),
 });
 
+// Export the schema type for client usage
 export type Schema = ClientSchema<typeof schema>;
 
+// Define and export the data configuration for the backend
 export const data = defineData({
-  schema,
+  schema,  // Attach the defined schema to the data configuration
   authorizationModes: {
-    defaultAuthorizationMode: 'iam',
-  },
+    // Set the default authorization mode
+    defaultAuthorizationMode: "apiKey",
+    // Configure the API key authorization mode
+    apiKeyAuthorizationMode: {
+      expiresInDays: 30,  // Set the expiration time for the API key to 30 days
+    }
+  }
 });
-
-/*== STEP 2 ===============================================================
-Go to your frontend source code. From your client-side code, generate a
-Data client to make CRUDL requests to your table. (THIS SNIPPET WILL ONLY
-WORK IN THE FRONTEND CODE FILE.)
-
-Using JavaScript or Next.js React Server Components, Middleware, Server 
-Actions or Pages Router? Review how to generate Data clients for those use
-cases: https://docs.amplify.aws/gen2/build-a-backend/data/connect-to-API/
-=========================================================================*/
-
-/*
-"use client"
-import { generateClient } from "aws-amplify/data";
-import type { Schema } from "@/amplify/data/resource";
-
-const client = generateClient<Schema>() // use this Data client for CRUDL requests
-*/
-
-/*== STEP 3 ===============================================================
-Fetch records from the database and use them in your frontend component.
-(THIS SNIPPET WILL ONLY WORK IN THE FRONTEND CODE FILE.)
-=========================================================================*/
-
-/* For example, in a React component, you can use this snippet in your
-  function's RETURN statement */
-// const { data: todos } = await client.models.Todo.list()
-
-// return <ul>{todos.map(todo => <li key={todo.id}>{todo.content}</li>)}</ul>
