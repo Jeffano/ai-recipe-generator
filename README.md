@@ -5,10 +5,7 @@ Developed a serverless web application designed for AI-powered recipe generation
 Demo Link: https://youtu.be/5K6dWU0f4bo
 
 The Process:
-
 <img width="422" alt="AWS" src="https://github.com/user-attachments/assets/82857c27-9cdd-482c-a41d-3eef258d63d4">
-
-
 
 
 ![recipe-generator-1](https://github.com/user-attachments/assets/26923f6c-1fbe-4016-9dd7-91aa802bb9fe)
